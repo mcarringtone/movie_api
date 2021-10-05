@@ -1,8 +1,6 @@
-const picture = document.getElementById("picture");
-const title = document.getElementById("title");
-const description = document.getElementById("description");
+const movieDiv = document.querySelector("movie-container");
 
-fetch(
+const api_url = fetch(
   "https://movie-database-imdb-alternative.p.rapidapi.com/?r=json&i=tt4154796",
   {
     method: "GET",
@@ -14,12 +12,19 @@ fetch(
 )
   .then((response) => response.json())
   .then((response) => {
-    (data) => {
-      picture.src = response.Poster;
-
-      title.innerHTML = response.Title;
-
-      description.innerHTML = response.Plot;
-    };
     console.log(response);
+  })
+  .catch((err) => {
+    console.error(err);
   });
+
+function getMovie() {
+  const response = await fetch(api_url);
+  const json = await response.json();
+  const div = document.createElement("div");
+  movieDiv.appendChild("div");
+
+  console.log(json);
+}
+
+getMovie();
